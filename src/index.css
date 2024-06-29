@@ -1,13 +1,58 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+h1,h2,h3,h4,h5,h6 {
+    @apply font-Primary text-Accent-Second;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.h1 {
+    @apply text-[64px] lg:text-[84px] leading-none;
 }
+
+.h2 {
+    @apply text-[50px] leading-tight;
+}
+
+.h3 {
+    @apply text-[25px]
+}
+
+.hamburger-line {
+    @apply w-[30px] h-[2px] my-2 block bg-black transition duration-300 ease-in-out;
+}
+
+.hamburger-active > span:nth-child(1) {
+    @apply rotate-45;
+}
+.hamburger-active > span:nth-child(2) {
+    @apply scale-0;
+}
+.hamburger-active > span:nth-child(3) {
+    @apply -rotate-45;
+}
+
+.navbar-fixed {
+    @apply fixed z-[9999] bg-white bg-opacity-70;
+    backdrop-fillter: blur(5px);
+    box-shadow: inset 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+
+
+.tag-list li {
+    @apply p-[1rem] bg-slate-200 rounded-lg;
+    box-shadow: 0 0.5rem 1rem -0.25 rgba(0, 0, 0, 0.2);
+
+}
+
+.scroller {
+    @apply max-w-[400px];
+    overflow: hidden;
+}
+
+.scroller__inner {
+    @apply flex gap-[1rem] justify-center items-center text-center flex-wrap;
+    flex-wrap: wrap;
+}
+
