@@ -1,5 +1,50 @@
 import './nav';
+import React, { useState } from "react";
+import emailjs from '@emailjs/browser';
 
+
+
+const Emailform = () => {
+
+
+    const [email, setEmail] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const servicedID = 'service_xk7w5t2';
+        const templateID = 'template_tslwi3n';
+        const publiciD = 'cFC4p7eOXl3v4CZjP';
+        // 
+        const templateParams = {
+            from_email: email
+        };
+
+        // 
+        emailjs.send(servicedID, templateID, templateParams, publiciD)
+        .then((response) => {
+            console.log('Email sent Succsesfully', response);
+            setEmail('Email has been sent');
+        })
+        .catch((error) => {
+            console.error ('error', error);
+        });
+
+    }
+    return(
+        <form onSubmit={handleSubmit} className="emailForm">
+            <input type="text"
+            placeholder="Your Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)} 
+            className='py-3 rounded-lg'/>
+            <button type="submit"
+            className='bg-slate-500 rounded-lg text-center p-1 text-Second'>
+                Send
+            </button>
+        </form>
+    )
+};
 
 function App() {
   return (
@@ -62,7 +107,7 @@ function App() {
                         Bizboost.
                     </h1>
                     <h2 className='h3 text-center text-slate-500 lg:text-[40px]'>
-                        Boost you're business
+                        Boost your businez
                     </h2>
                 </div>
             </div>
@@ -85,26 +130,6 @@ function App() {
                             <div className='Prod col-span-6 row-span-8 lg:col-span-6 lg:row-span-10 bg-slate-400 p-4 rounded-lg border border-Primary bg-opacity-50'/>
                             <div className='Prod col-span-6 row-span-8 lg:col-span-6 lg:row-span-10 bg-slate-400 p-4 rounded-lg border border-Primary bg-opacity-50'/>
                         </div>
-                    </div>
-                </div>
-            </div>
-         </section>
-         <section id='Antares' name='OCA' className='py-20'>
-            <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
-                <div className='w-full self-start px-4 mb-2'>
-                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
-                        ANTARES
-                    </h1>
-                </div>
-                <div className='flex justify-center flex-nowrap w-screen'>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
                     </div>
                 </div>
             </div>
@@ -169,6 +194,26 @@ function App() {
                 </div>
             </div>
          </section>
+         <section id='Antares' name='OCA' className='py-20'>
+            <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
+                <div className='w-full self-start px-4 mb-2'>
+                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
+                        ANTARES
+                    </h1>
+                </div>
+                <div className='flex justify-center flex-nowrap w-screen'>
+                    <div className='mx-1'>
+                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
+                    </div>
+                    <div className='mx-1'>
+                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
+                    </div>
+                    <div className='mx-1'>
+                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
+                    </div>
+                </div>
+            </div>
+         </section>
          {/* tentang kami */}
          <section id='Tentang-kami' name='Tentang-kami' className='pt-36 mb-10'>
             <div className='flex flex-wrap py-10 lg:py-5'>
@@ -176,7 +221,7 @@ function App() {
                     <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
                         Tentang kami
                     </h1>
-                    <p className='text-[28px] font-Second'>
+                    <p className='text-[28px] font-Second pb-9'>
                         Biszboost merupakan perusahaan yang 
                         bergerak di bidang pemasaran Teknologi Inromfasi
                     </p>
@@ -209,17 +254,17 @@ function App() {
 
          </section>
     </main>
-    <footer className='w-full h-[240px] bg-orange-400 flex'>
+    <footer className='w-full h-[240px] bg-gray-400 flex'>
         {/* logo */}
-        <div className='py-8 px-4 text-white w-1/4'>
+        <div className='py-8 px-4 text-white w-1/3'>
                 <a href='#home'>
                     <img src='/asset/Logo/WhatsApp_Image_2024-06-21_at_12.55.54_PM-removebg-preview.png' 
                     className='w-32 lg:w-36'
                     alt='' />
                 </a>
             </div>
-        <div className='py-8 text-gray-500 w-1/4'>
-            <ul className='text-[15px]'>
+        <div className='py-8 text-gray-500 w-1/3'>
+            <ul className='text-[15px] py-10'>
                 <li className='font-light'>
                     <h2>
                      Instagram
@@ -237,8 +282,13 @@ function App() {
                 </li>
             </ul>
         </div>
-        <div className='py-8 text-slate-500 w-1/4'>
+        <div className='py-8 text-slate-500 w-1/3'>
             <ul className='text-[15px]'>
+                <li className='pb-5'>
+                    <h2>
+                        Dalam Naungan
+                    </h2>
+                </li>
                 <li className='font-light font-Primary'>
                     <h2>
                     Telkom Indondesia
@@ -258,12 +308,10 @@ function App() {
         </div>
         <div className='py-8 text-gray-500 w-1/2'>
             <div className='w-full lg:w-1/2 px-4 mb-5'>
-                    <h2 className='text-[15px] font-primary mb-3 lg:text-[18px] self-center'>
-                        Berlangganan sekarang
-                    </h2>
-                    <p className='text-[20px] font-Second'>
-                        Email
-                    </p>
+                <h2 className='font-light font-Primary pb-5'>
+                    Berlangganan sekarang
+                </h2>
+                <Emailform />
             </div>
 
         </div>
