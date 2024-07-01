@@ -2,7 +2,7 @@ import './nav';
 import React, { useState } from "react";
 import emailjs from '@emailjs/browser';
 
-
+import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
 
 const Emailform = () => {
 
@@ -32,12 +32,12 @@ const Emailform = () => {
 
     }
     return(
-        <form onSubmit={handleSubmit} className="emailForm">
+        <form onSubmit={handleSubmit} className="emailForm w-1/2 flex">
             <input type="text"
             placeholder="Your Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)} 
-            className='py-3 rounded-lg'/>
+            className='py-1 rounded-lg ring'/>
             <button type="submit"
             className='bg-slate-500 rounded-lg text-center p-1 text-Second'>
                 Send
@@ -47,6 +47,43 @@ const Emailform = () => {
 };
 
 function App() {
+    const slidesNetmonk = [
+    {
+      url: '/asset/product/NETMONK/IMG_3193.JPG',
+    },
+    {
+      url: '/asset/product/NETMONK/NETMONK.jpeg',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    },
+
+    {
+      url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+    },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prevSlide = () => {
+    const isFirstSlide = currentIndex === 0;
+    const newIndex = isFirstSlide ? slidesNetmonk.length -1 : currentIndex - 1;
+    setCurrentIndex(newIndex);
+  };
+
+  const nextSlide = () => {
+    const isLastSlide = currentIndex === slidesNetmonk.length -1;
+    const newIndex = isLastSlide ? 0 : currentIndex +1;
+    setCurrentIndex(newIndex)
+  };
+
+  const goToSlide = (slideIndex) => {
+    setCurrentIndex(slideIndex);
+  };
+
   return (
     <div>
     <header id='Header' className='w-full bg-transparent absolute top-0 left-0 flex items-center z-10 pb-3'>
@@ -55,13 +92,13 @@ function App() {
             <div className='px-2 pt-2'>
                 <a href='#home'>
                     <img src='/asset/Logo/WhatsApp_Image_2024-06-21_at_12.55.54_PM-removebg-preview.png' 
-                    className='w-24 lg:w-32'
+                    className='w-24 lg:w-24'
                     alt='' />
                 </a>
             </div>
             <div className='flex item-center px-4'>
-                  <nav id='nav-menu' className='hidden absolute py-5 ml-10 bg-white 
-                  shadow-lg rounded-lg max-w-[240px] w-full right-4 left-8 pl-10 top-full 
+                  <nav id='nav-menu' className='hidden absolute py-5 bg-white 
+                  shadow-lg rounded-lg max-w-[240px] w-full right-4 left-8 top-full 
                   lg:block lg:static lg:bg-transparent lg:max-w-[800px] lg:shadow-none lg:rounded-none'>
                     <ul className='block lg:flex'>
                         <li className='group'>
@@ -176,22 +213,20 @@ function App() {
          </section>
          <section id='Antares' name='OCA' className='py-20'>
             <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
-                <div className='w-full self-start px-4 mb-2'>
-                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
-                        NETMONK
-                    </h1>
-                </div>
-                <div className='flex justify-center flex-nowrap w-screen'>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                </div>
+                <div className='max-w-[980px] h-[480px] lg:h-[800px] w-full m-auto py-16 px-4 relative group'>
+      <div
+        style={{ backgroundImage: `url(${slidesNetmonk[currentIndex].url})` }}
+        className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
+      ></div>
+      {/* Left Arrow */}
+      <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactLeft onClick={prevSlide} size={30} />
+      </div>
+      {/* Right Arrow */}
+      <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+        <BsChevronCompactRight onClick={nextSlide} size={30} />
+      </div>
+    </div>
             </div>
          </section>
          <section id='Antares' name='OCA' className='py-20'>
@@ -223,7 +258,7 @@ function App() {
                     </h1>
                     <p className='text-[28px] font-Second pb-9'>
                         Biszboost merupakan perusahaan yang 
-                        bergerak di bidang pemasaran Teknologi Inromfasi
+                        bergerak di bidang pemasaran Teknologi Informasi
                     </p>
                     <button className='py-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl bg-opacity-40 bg-transparent px-5
                     hover:bg-gradient-to-l hover:shadow-lg transition-all hover:duration-500 ease-in-out'>
@@ -248,23 +283,47 @@ function App() {
                         <img src='./asset/Bento/OCA.png' className='max-w-full mx-auto flex justify-center rounded-lg bg-cover' alt='' />
                     </div>
                 </div>
+                <div className='w-1/2'>
+                    <div className='py-8 text-gray-500 w-1/2'>
+                        <h2 className='h3 font-Second text-Primary px-4 pb-3'>
+                             Maps
+                        </h2>
+                        <p className='text-[15px] font-Second text-Primary px-4 pb-3'>
+                            Jl. Kopo Sayati No.182, Sayati, Kec. Margahayu, Kota Bandung, Jawa Barat 40228
+                        </p>
+                        <h2 className='h3 font-Second text-Primary px-4 pb-3'>
+                             Email
+                        </h2>
+                        <p className='text-[15px] font-Second text-Primary px-4 pb-3'>
+                            Bizboostn@gmail.com
+                        </p>
+                        <div className='w-1//3 h3 lg:w-1/2 px-4 pb-3 mb-5'>
+                            <h2 className='font-light font-Primary pb-5'>
+                                Berlangganan sekarang
+                            </h2>
+                            <Emailform/>
+                        </div>
+                    </div>
+                 </div>
             </div>
          </section>
-         <section className='w-full'>
-
-         </section>
     </main>
-    <footer className='w-full h-[240px] bg-gray-400 flex'>
+    <footer className='w-full h-[240px] bg-gray-400 flex flex-wrap'>
         {/* logo */}
-        <div className='py-8 px-4 text-white w-1/3'>
+        <div className='py-8 px-2 w-1/4 lg:py-8 lg:px-4 text-white lg:w-1/3 flex'>
                 <a href='#home'>
                     <img src='/asset/Logo/WhatsApp_Image_2024-06-21_at_12.55.54_PM-removebg-preview.png' 
                     className='w-32 lg:w-36'
                     alt='' />
                 </a>
-            </div>
-        <div className='py-8 text-gray-500 w-1/3'>
-            <ul className='text-[15px] py-10'>
+        </div>
+        <div className='py-8 w-1/4 text-gray-500 lg:w-1/3'>
+            <ul className='text-[8px] lg:text-[15px]'>
+                <li className='pb-5'>
+                    <h2>
+                        Social Media
+                    </h2>
+                </li>
                 <li className='font-light'>
                     <h2>
                      Instagram
@@ -282,8 +341,8 @@ function App() {
                 </li>
             </ul>
         </div>
-        <div className='py-8 text-slate-500 w-1/3'>
-            <ul className='text-[15px]'>
+        <div className='py-8 w-1/4 text-slate-500 lg:w-1/3'>
+            <ul className='text-[8px] lg:text-[15px]'>
                 <li className='pb-5'>
                     <h2>
                         Dalam Naungan
@@ -305,15 +364,6 @@ function App() {
                     </h2>
                 </li>
             </ul>
-        </div>
-        <div className='py-8 text-gray-500 w-1/2'>
-            <div className='w-full lg:w-1/2 px-4 mb-5'>
-                <h2 className='font-light font-Primary pb-5'>
-                    Berlangganan sekarang
-                </h2>
-                <Emailform />
-            </div>
-
         </div>
     </footer>
 </div>
