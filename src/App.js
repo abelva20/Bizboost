@@ -1,53 +1,65 @@
 import './nav';
-import React, { useState } from "react";
-import emailjs from '@emailjs/browser';
-
 import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs';
+import React, {useState} from "react";
+import Popup from './pop-up';
 
-const Emailform = () => {
-
-
-    const [email, setEmail] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        const servicedID = 'service_xk7w5t2';
-        const templateID = 'template_tslwi3n';
-        const publiciD = 'cFC4p7eOXl3v4CZjP';
-        // 
-        const templateParams = {
-            from_email: email
-        };
-
-        // 
-        emailjs.send(servicedID, templateID, templateParams, publiciD)
-        .then((response) => {
-            console.log('Email sent Succsesfully', response);
-            setEmail('Email has been sent');
-        })
-        .catch((error) => {
-            console.error ('error', error);
-        });
-
-    }
-    return(
-        <form onSubmit={handleSubmit} className="emailForm w-1/2 flex">
-            <input type="text"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)} 
-            className='py-1 rounded-lg ring'/>
-            <button type="submit"
-            className='bg-slate-500 rounded-lg text-center p-1 text-Second'>
-                Send
-            </button>
-        </form>
-    )
-};
 
 function App() {
     const slidesNetmonk = [
+    {
+      url: '/asset/product/NETMONK/IMG_3193.JPG',
+    },
+    {
+      url: '/asset/product/NETMONK/NETMONK.jpeg',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    },
+
+    {
+      url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+    },
+  ];
+    const slidesOCA = [
+    {
+      url: '/asset/product/NETMONK/IMG_3193.JPG',
+    },
+    {
+      url: '/asset/product/NETMONK/NETMONK.jpeg',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    },
+
+    {
+      url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+    },
+  ];
+    const slidesPIJAR = [
+    {
+      url: '/asset/product/NETMONK/IMG_3193.JPG',
+    },
+    {
+      url: '/asset/product/NETMONK/NETMONK.jpeg',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1661961112951-f2bfd1f253ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2672&q=80',
+    },
+
+    {
+      url: 'https://images.unsplash.com/photo-1512756290469-ec264b7fbf87?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2253&q=80',
+    },
+    {
+      url: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2671&q=80',
+    },
+  ];
+    const slidesANTARES = [
     {
       url: '/asset/product/NETMONK/IMG_3193.JPG',
     },
@@ -78,10 +90,6 @@ function App() {
     const isLastSlide = currentIndex === slidesNetmonk.length -1;
     const newIndex = isLastSlide ? 0 : currentIndex +1;
     setCurrentIndex(newIndex)
-  };
-
-  const goToSlide = (slideIndex) => {
-    setCurrentIndex(slideIndex);
   };
 
   return (
@@ -171,81 +179,95 @@ function App() {
                 </div>
             </div>
          </section>
-         <section id='Antares' name='OCA' className='py-20'>
-            <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
-                <div className='w-full self-start px-4 mb-2'>
-                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
-                        OCA
-                    </h1>
+         <section id='OCA' name='OCA' className='py-20'>
+         <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
+                <div className='max-w-[980px] h-[480px] lg:h-[800px] w-full m-auto py-16 px-4 relative group'>
+                <div
+                style={{ backgroundImage: `url(${slidesOCA[currentIndex].url})` }}
+                className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
+                ></div>
+                {/* Left Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactLeft onClick={prevSlide} size={30} />
                 </div>
-                <div className='flex justify-center flex-nowrap w-screen'>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
+                {/* Right Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactRight onClick={nextSlide} size={30} />
                 </div>
-            </div>
-         </section>
-         <section id='Antares' name='OCA' className='py-20'>
-            <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
-                <div className='w-full self-start px-4 mb-2'>
-                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
-                        PIJAR
-                    </h1>
+                <div className='pt-20'>
+                    <h2 className='text-[32px] font-light text-Primary font-Primary'>
+                        Lorem ipsum dolor sit amet.
+                    </h2>
                 </div>
-                <div className='flex justify-center flex-nowrap w-screen'>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
                 </div>
             </div>
          </section>
-         <section id='Antares' name='OCA' className='py-20'>
+         <section id='PIJAR' name='Pijar' className='py-20'>
+         <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
+                <div className='max-w-[980px] h-[480px] lg:h-[800px] w-full m-auto py-16 px-4 relative group'>
+                <div
+                style={{ backgroundImage: `url(${slidesPIJAR[currentIndex].url})` }}
+                className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
+                ></div>
+                {/* Left Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactLeft onClick={prevSlide} size={30} />
+                </div>
+                {/* Right Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactRight onClick={nextSlide} size={30} />
+                </div>
+                <div className='pt-20'>
+                    <h2 className='text-[32px] font-light text-Primary font-Primary'>
+                        Lorem ipsum dolor sit amet.
+                    </h2>
+                </div>
+                </div>
+            </div>
+         </section>
+         <section id='NETMONK' name='NETMONK' className='py-2'>
             <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
                 <div className='max-w-[980px] h-[480px] lg:h-[800px] w-full m-auto py-16 px-4 relative group'>
-      <div
-        style={{ backgroundImage: `url(${slidesNetmonk[currentIndex].url})` }}
-        className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
-      ></div>
-      {/* Left Arrow */}
-      <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-        <BsChevronCompactLeft onClick={prevSlide} size={30} />
-      </div>
-      {/* Right Arrow */}
-      <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
-        <BsChevronCompactRight onClick={nextSlide} size={30} />
-      </div>
-    </div>
+                <div
+                style={{ backgroundImage: `url(${slidesNetmonk[currentIndex].url})` }}
+                className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
+                ></div>
+                {/* Left Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactLeft onClick={prevSlide} size={30} />
+                </div>
+                {/* Right Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactRight onClick={nextSlide} size={30} />
+                </div>
+                <div className='pt-20'>
+                    <h2 className='text-[32px] font-light text-Primary font-Primary'>
+                        Lorem ipsum dolor sit amet.
+                    </h2>
+                </div>
+                </div>
             </div>
          </section>
-         <section id='Antares' name='OCA' className='py-20'>
-            <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
-                <div className='w-full self-start px-4 mb-2'>
-                    <h1 className='h3 font-primary font-semibold mb-3 lg:text-[50px]'>
-                        ANTARES
-                    </h1>
+         <section id='ANTARES' name='ANTARES' className='py-20'>
+         <div className='flex flex-wrap py-10 lg:py-5 mx-6'>
+                <div className='max-w-[980px] h-[480px] lg:h-[800px] w-full m-auto py-16 px-4 relative group'>
+                <div
+                style={{ backgroundImage: `url(${slidesANTARES[currentIndex].url})` }}
+                className='w-full h-full rounded-2xl bg-center items-center bg-cover duration-500'
+                ></div>
+                {/* Left Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactLeft onClick={prevSlide} size={30} />
                 </div>
-                <div className='flex justify-center flex-nowrap w-screen'>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
-                    <div className='mx-1'>
-                        <img src='./asset/product/OCAS2.jpeg' className='max-w-[360px] lg:max-w-full mx-auto lg:flex justify-center rounded-lg lg:bg-cover' alt='' />
-                    </div>
+                {/* Right Arrow */}
+                <div className='block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer'>
+                <BsChevronCompactRight onClick={nextSlide} size={30} />
+                </div>
+                <div className='pt-20'>
+                    <h2 className='text-[32px] font-light text-Primary font-Primary'>
+                        Lorem ipsum dolor sit amet.
+                    </h2>
+                </div>
                 </div>
             </div>
          </section>
@@ -260,13 +282,7 @@ function App() {
                         Biszboost merupakan perusahaan yang 
                         bergerak di bidang pemasaran Teknologi Informasi
                     </p>
-                    <button className='py-5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl bg-opacity-40 bg-transparent px-5
-                    hover:bg-gradient-to-l hover:shadow-lg transition-all hover:duration-500 ease-in-out'>
-                        <h2 href='#'
-                        className='h3 text-Accent-Primary font-medium self-center'>
-                            Hubungi Kami
-                        </h2>
-                    </button>
+                    <Popup />
                 </div>
                 <div className='w-full self-end px-4 lg:w-1/2'>
                     <div className='mx-5'>
@@ -283,7 +299,7 @@ function App() {
                         <img src='./asset/Bento/OCA.png' className='max-w-full mx-auto flex justify-center rounded-lg bg-cover' alt='' />
                     </div>
                 </div>
-                <div className='w-1/2'>
+                <div className='lg:w-1/2'>
                     <div className='py-8 text-gray-500 w-1/2'>
                         <h2 className='h3 font-Second text-Primary px-4 pb-3'>
                              Maps
@@ -297,12 +313,6 @@ function App() {
                         <p className='text-[15px] font-Second text-Primary px-4 pb-3'>
                             Bizboostn@gmail.com
                         </p>
-                        <div className='w-1//3 h3 lg:w-1/2 px-4 pb-3 mb-5'>
-                            <h2 className='font-light font-Primary pb-5'>
-                                Berlangganan sekarang
-                            </h2>
-                            <Emailform/>
-                        </div>
                     </div>
                  </div>
             </div>
@@ -366,6 +376,7 @@ function App() {
             </ul>
         </div>
     </footer>
+
 </div>
   );
 };
